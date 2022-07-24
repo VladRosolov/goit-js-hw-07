@@ -6,9 +6,6 @@ const imagesMarkup = createGalleryMarkup(galleryItems);
 
 galleryContainer.insertAdjacentHTML( 'beforeend' ,imagesMarkup);
 
-galleryContainer.addEventListener('click', SimpleLightbox);
-
-
 
 function createGalleryMarkup (images) {
     return galleryItems.map ( ({ preview, original, description}) => {

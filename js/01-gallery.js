@@ -33,28 +33,50 @@ function onGalleryClick (click) {
     const originalImage = click.target.dataset.source;
 
     if (click.target.classList.contains('gallery__image')) {
-        const instance = basicLightbox.create(`
-        <img  src="${originalImage}">
-        `);
-        instance.show();
 
-    document.addEventListener('keydown', onEscClick);
         function onEscClick (event) {
             if (event.code === 'Escape') {
-                instance.close()
-                }
+            console.log(event)
+            instance.close()
             }
-        };
+        }
 
+        const instance = basicLightbox.create(
+            `<img  src="${originalImage}">`, {
+
+            onShow: (instance) => {
+                window.addEventListener('keydown', onEscClick);
+                },
+            onClose: (instance) => {
+                window.removeEventListener('keydown', onEscClick);
+                } 
+            });
+        instance.show();
+        };
+        
 }
 
 
 
 
+// function onGalleryClick (click) {
+//     click.preventDefault();
+//     const originalImage = click.target.dataset.source;
 
+//     if (click.target.classList.contains('gallery__image')) {
 
+//         const instance = basicLightbox.create(`
+//         <img  src="${originalImage}">
+//         `);
+//         instance.show();
 
+//     document.addEventListener('keydown', onEscClick);
+//         function onEscClick (event) {
+//             if (event.code === 'Escape') {
+//                 console.log(event)
+//                 instance.close()
+//                 }
+//             }
 
-
-
-
+//         };
+// }
